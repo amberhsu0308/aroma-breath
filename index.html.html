@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Ø黃金比例呼吸法</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      color: #40533f;
+      background: linear-gradient(180deg, #eef5ec, #dce8d8);
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 18px;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 680px;
+      min-height: 88vh;
+      padding: clamp(24px, 6vw, 48px);
+      text-align: center;
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.38);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 60px rgba(90, 120, 80, 0.18);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(26px, 7vw, 42px);
+      letter-spacing: 0.04em;
+    }
+
+    .subtitle {
+      font-size: clamp(14px, 3.8vw, 18px);
+      color: #6d8068;
+      margin-bottom: clamp(28px, 7vw, 52px);
+      line-height: 1.7;
+    }
+
+    .circle-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: clamp(30px, 8vw, 46px);
+    }
+
+    .circle {
+      width: clamp(150px, 42vw, 260px);
+      height: clamp(150px, 42vw, 260px);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 30%, #fff8cf, #f3d98a 28%, #a8c99f 60%, #7fac79 100%);
+      box-shadow:
+        0 0 35px rgba(255, 235, 170, 0.75),
+        0 0 90px rgba(145, 190, 130, 0.65);
+      animation: breathe 10.5s infinite ease-in-out;
+    }
+
+    @keyframes breathe {
+      0% {
+        transform: scale(0.72);
+        opacity: 0.82;
+      }
+
+      38.1% {
+        transform: scale(1.18);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(0.72);
+        opacity: 0.82;
+      }
+    }
+
+    .breath-text {
+      font-size: clamp(28px, 8vw, 44px);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .guide {
+      font-size: clamp(16px, 4vw, 22px);
+      line-height: 1.8;
+      color: #526950;
+      min-height: 80px;
+    }
+
+    .info {
+      margin-top: 20px;
+      font-size: clamp(13px, 3vw, 15px);
+      color: #7b8d76;
+    }
+
+    .buttons {
+      margin-top: 28px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 12px 22px;
+      font-size: clamp(14px, 3.5vw, 16px);
+      color: #40533f;
+      background: rgba(255, 255, 255, 0.76);
+      box-shadow: 0 8px 24px rgba(80, 110, 70, 0.15);
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #ffffff;
+    }
+
+    .credit-box {
+      margin-top: 30px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(100, 120, 90, 0.25);
+      font-size: clamp(12px, 2.8vw, 14px);
+      line-height: 1.8;
+      color: #6f806d;
+    }
+
+    .credit-box p {
+      margin: 4px 0;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 0;
+        align-items: stretch;
+      }
+
+      .app {
+        width: 100vw;
+        min-height: 100vh;
+        border-radius: 0;
+        padding: 30px 22px;
+      }
+
+      .guide {
+        min-height: 96px;
+      }
+
+      .buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      button {
+        width: 100%;
+        max-width: 280px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+    <h1>Ø黃金比例呼吸法</h1>
+
+    <div class="subtitle">
+      Ø-breath<br>
+      跟著光，慢慢回到身體裡
+    </div>
+
+    <div class="circle-wrap">
+      <div class="circle"></div>
+    </div>
+
+    <div class="breath-text" id="breathText">吸氣</div>
+
+    <div class="guide" id="guideText">
+      想像植物的清新氣息，<br>
+      正溫柔地進入你的身體。
+    </div>
+
+    <div class="info">
+      吸氣 4 秒｜吐氣 6.5 秒
+    </div>
+
+    <div class="buttons">
+      <button onclick="toggleMusic()" id="musicBtn">
+        開啟背景音樂 🌿
+      </button>
+
+      <button onclick="restartBreath()">
+        重新開始
+      </button>
+    </div>
+
+    <div class="credit-box">
+      <p>Ø黃金比例呼吸法（Ø-breath）</p>
+      <p>此呼吸法來自 IAA 協會理事長王有綱老師開創教授</p>
+      <p>此網頁由許茗惠 Ming-Hui Hsu 製作</p>
+    </div>
+
+    <audio id="bgMusic" loop>
+      <source src="music.mp3" type="audio/mpeg">
+      你的瀏覽器不支援音樂播放。
+    </audio>
+  </main>
+
+  <script>
+    const breathText = document.getElementById("breathText");
+    const guideText = document.getElementById("guideText");
+    const music = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
+
+    let cycleTimer;
+    let cycleInterval;
+
+    function startBreathCycle() {
+      breathText.innerText = "吸氣";
+      guideText.innerHTML = "想像植物的清新氣息，<br>正溫柔地進入你的身體。";
+
+      clearTimeout(cycleTimer);
+
+      cycleTimer = setTimeout(() => {
+        breathText.innerText = "吐氣";
+        guideText.innerHTML = "讓壓力、疲憊與灰暗感，<br>慢慢離開你的身體。";
+      }, 4000);
+    }
+
+    function restartBreath() {
+      clearTimeout(cycleTimer);
+      clearInterval(cycleInterval);
+
+      startBreathCycle();
+      cycleInterval = setInterval(startBreathCycle, 10500);
+    }
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        musicBtn.innerText = "暫停背景音樂";
+      } else {
+        music.pause();
+        musicBtn.innerText = "開啟背景音樂 🌿";
+      }
+    }
+
+    startBreathCycle();
+    cycleInterval = setInterval(startBreathCycle, 10500);
+  </script>
+</body>
+</html>
